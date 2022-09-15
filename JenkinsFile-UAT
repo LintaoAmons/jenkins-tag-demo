@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '2'))
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage("prevSteps") {
+            steps{
+                sh("./mvnw clean")
+            }
+        }
+
+        stage("Build Image") {
+            steps{
+                echo "image built"
+            }
+        }
+    }
+}
